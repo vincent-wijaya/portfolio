@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import {
   Navbar,
   NavbarBrand,
@@ -19,8 +18,8 @@ export default function Header() {
 
   const menuItems = [
     {
-      label: 'About Me',
-      id: 'about-me',
+      label: 'About',
+      id: 'about',
     },
     {
       label: 'Experience',
