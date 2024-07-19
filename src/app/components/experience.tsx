@@ -8,8 +8,8 @@ const experienceList = [
         date: 'February 2024 - June 2024',
         description:
             'Worked with a team of Computer Science and Software Engineering students to develop a web application for Mobilise. The application is designed to help Mobilise manage their volunteers and events, and volunteers to sign up for events.',
-        logo: '/assets/180dc.jpeg',
-        logo_dark: '/assets/180dc_dark.jpg',
+        logo: 'assets/180dc.jpeg',
+        logo_dark: 'assets/180dc_dark.jpg',
     },
 ];
 

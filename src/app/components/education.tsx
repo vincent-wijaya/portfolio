@@ -7,8 +7,8 @@ const educationList = [
         date: 'February 2020 - December 2024',
         location: 'Clayton, VIC',
         description: 'Current GPA: 3.38, WAM: 77.56',
-        logo: '/assets/monash.svg',
-        logo_dark: '/assets/monash_dark.png',
+        logo: 'assets/monash.svg',
+        logo_dark: 'assets/monash_dark.png',
         url: 'https://www.monash.edu/',
     },
     {
@@ -17,8 +17,8 @@ const educationList = [
         date: 'June 2018 - December 2019',
         location: 'Clayton, VIC',
         description: 'GPA: 4.0, WAM: 88.0',
-        logo: '/assets/monash_college.jpg',
-        logo_dark: '/assets/monash_college.jpg',
+        logo: 'assets/monash_college.jpg',
+        logo_dark: 'assets/monash_college.jpg',
         url: 'https://www.monashcollege.edu.au/',
         videos: [
             {
