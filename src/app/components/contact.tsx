@@ -1,5 +1,4 @@
 import { Button } from '@nextui-org/react';
-import LinkedInIcon from './LinkedinIcon';
 
 export default function Contact() {
     return (
@@ -28,9 +27,9 @@ export default function Contact() {
             </div>
             <div className="flex flex-row align-middle justify-between mt-2">
                 <h3 className='text-xl'>GitHub</h3>
-                <p className="text-lg">
+                <p className="bg-slate-500 px-3 py-2 rounded-full">
                     <a href="https://www.github.com/vincenwi" target="_blank">
-                        Vincent Wijaya
+                        vincenwi
                     </a>
                 </p>
             </div>
