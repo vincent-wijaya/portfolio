@@ -4,11 +4,12 @@ const projectList = [
     {
         title: 'Mobilise Volunteering Platform',
         description:
-            'A centralised platform for volunteers to find and apply for volunteering opportunities.',
+            'A centralised platform for volunteers to find and apply for volunteering opportunities. Our team continued the development of the platform from the previous semester, where only the some of the front-end was completed. I worked on the outreach management side of the platform, where Mobilise can manage their outreach events and volunteers can sign up for events.',
         tools: [
             'React', 
             'Supabase', 
             'PostgreSQL', 
+            'Sass',
             'GitHub'
         ],
         links: [
@@ -21,13 +22,14 @@ const projectList = [
     {
         title: 'Internet-Based Brewing Controller',
         description:
-            "A Final Year Project to create a web-based controller for a Monash Brewlab's fermentation system. The system consists of a AWS hosted web server and a Raspberry Pi to control the fermentation system. \n\nFeatures include temperature control, data logging, and remote monitoring.",
+            "A Final Year Project to create a web-based controller for a Monash Brewlab's fermentation system. The system consists of a AWS hosted web server and a Raspberry Pi to control the fermentation system. \n\nFeatures include temperature control, data logging, and remote monitoring. \n\nI mainly worked on the web interface, adding the live chart display, schedule event system, manual override system, and the authentication component of the web interface.",
         tools: [
             'Vue.js',
             'AWS',
             'AWS Gateway',
             'AWS Lambda',
             'AWS DynamoDB',
+            'AWS Cognito',
             'AWS S3',
             'Raspberry Pi',
             'Python',
@@ -43,6 +45,23 @@ const projectList = [
                 url: 'https://drive.google.com/drive/u/0/folders/1zksBAL9Lfi7xnPTBEBDQ2Vr_fsmgG2bX'
             }
         ],
+        images: [
+            {
+                title: 'Web Interface',
+                url: 'assets/mb_home.png',
+                isPortrait: false,
+            },
+            {
+                title: 'Raspberry Pi',
+                url: 'assets/mb_schedule.png',
+                isPortrait: true,
+            },
+            {
+                title: 'AWS Architecture',
+                url: 'assets/mb_fault.png',
+                isPortrait: false,
+            }
+        ]
     },
     {
         title: 'Finding Neno - Lost Pet Finder Mobile App',
@@ -68,14 +87,17 @@ const projectList = [
             {
                 title: 'Login Page',
                 url: 'assets/fn_login.png',
+                isPortrait: true,
             },
             {
                 title: 'Missing Pet Reports',
                 url: 'assets/fn_reports.png',
+                isPortrait: true,
             },
             {
                 title: 'Map page',
                 url: 'assets/fn_map.png',
+                isPortrait: true,
             },
         ]
     },
@@ -92,12 +114,14 @@ const toolColors: { [key: string]: string } = {
     'AWS Gateway': 'border-yellow-400',
     'AWS Lambda': 'border-orange-400',
     'AWS DynamoDB': 'border-blue-600',
+    'AWS Cognito': 'border-red-500',
     'AWS S3': 'border-red-300',
     'Raspberry Pi': 'border-red-400',
     Python: 'border-yellow-400',
     GitHub: 'border-gray-400',
     'Google Maps API': 'border-green-400',
     'Rest API': 'border-gray-400',
+    Sass: 'border-pink-400',
     SendGrid: 'border-blue-400',
 }
 
@@ -145,14 +169,14 @@ export default function Projects() {
                             ))}
                         </div>
                     </div>
-                    <div className="flex flex-row justify-between">
+                    <div className="flex flex-row flex-wrap justify-between gap-2">
                         {project.images?.map((image, index) => (
                             <Image
                                 key={`${image}-${index}`}
                                 src={image.url}
                                 alt={image.title}
-                                width={230}
-                                height={500}
+                                width={image.isPortrait ? 230 : 500}
+                                height={image.isPortrait ? 500 : 200}
                             />
                         ))}
                     </div>
