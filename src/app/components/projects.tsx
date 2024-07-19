@@ -47,18 +47,23 @@ const projectList = [
         ],
         images: [
             {
-                title: 'Web Interface',
+                title: 'Home Page',
                 url: 'assets/mb_home.png',
                 isPortrait: false,
             },
             {
-                title: 'Raspberry Pi',
+                title: 'Schedule Event Page',
                 url: 'assets/mb_schedule.png',
                 isPortrait: true,
             },
             {
-                title: 'AWS Architecture',
+                title: 'Faults',
                 url: 'assets/mb_fault.png',
+                isPortrait: false,
+            },
+            {
+                title: 'Team Photo with product',
+                url: 'assets/mb_team.jpg',
                 isPortrait: false,
             }
         ]
