@@ -28,8 +28,8 @@ export default function Contact() {
             <div className="flex flex-row align-middle justify-between mt-2">
                 <h3 className='text-xl'>GitHub</h3>
                 <p className="bg-slate-500 px-3 py-2 rounded-full">
-                    <a href="https://www.github.com/vincenwi" target="_blank">
-                        vincenwi
+                    <a href="https://www.github.com/vincent-wijaya" target="_blank">
+                        vincent-wijaya
                     </a>
                 </p>
             </div>
