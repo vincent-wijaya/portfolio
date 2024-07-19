@@ -68,7 +68,7 @@ export default function Education() {
                     <p className="text-lg">{education.date}</p>
                     <p className="text-lg mb-2">{education.description}</p>
                     <div className="flex flex-col">
-                        <div className="flex flex-row flex-wrap gap-2">
+                        <div className="flex flex-row flex-wrap gap-2 justify-between">
                             {education.videos?.map((video) => (
                                 <iframe
                                     key={video.title}
