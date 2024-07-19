@@ -9,7 +9,7 @@ export default function About() {
             </p>
             <p className='text-5xl mt-4 font-bold italic transition duration-300 hover:scale-125 text-center'>Vincent Wijaya</p>
             <p className='text-xl mt-4'>
-                I&apos;m a software engineer student based in Melbourne. I am set to graduate at the end of 2024 with 
+                I&apos;m a software engineer student based in Melbourne, Australia. I am set to graduate at the end of 2024 with 
                 a Bachelor of Software Engineering (Hons) from Monash University.
             </p>
         </section>

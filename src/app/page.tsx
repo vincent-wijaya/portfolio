@@ -5,6 +5,7 @@ import Education from "./components/education";
 import Experience from "./components/experience";
 import Header from "./components/header";
 import Projects from "./components/projects";
+import Contact from './components/contact';
 
 export default function Home() {
     return (
@@ -17,6 +18,7 @@ export default function Home() {
                 <Experience />
                 <Education />
                 <Projects />
+                <Contact />
             </div>
         </main>
     );

@@ -33,10 +33,10 @@ export default function Header() {
       label: 'Education',
       id: 'education',
     },
-    {
-      label: 'Skills',
-      id: 'skills',
-    },
+    // {
+    //   label: 'Skills',
+    //   id: 'skills',
+    // },
     {
       label: 'Contact',
       id: 'contact',
