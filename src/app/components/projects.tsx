@@ -101,7 +101,6 @@ export default function Projects() {
                     <h3 className="text-2xl font-bold">{project.title}</h3>
                     <p className="text-lg mb-2">{project.description}</p>
                     <div className="flex flex-col mb-2">
-                        Tools
                         <div className="flex flex-wrap flex-row gap-2">
                             {project.tools?.map((tool, index) => (
                                 <p
