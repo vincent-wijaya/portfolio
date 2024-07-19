@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const projectList = [
     {
         title: 'Mobilise Volunteering Platform',
@@ -45,7 +47,7 @@ const projectList = [
     {
         title: 'Finding Neno - Lost Pet Finder Mobile App',
         description:
-            'A mobile app that allows users to report lost pets and view lost pets in their area. The app allows users to post lost pets, view lost pets in their area, post sightings of pets, and contact the owner of the lost pet.',
+            'A mobile app that allows users to report lost pets and view lost pets in their area. Users can post lost pets, view lost pets in their area, post sightings of pets, and contact the owner of the lost pet. Missing pets that are reported nearby are notified to the user.',
         tools: [
             'React Native', 
             'Expo',
@@ -62,6 +64,20 @@ const projectList = [
                 url: 'https://github.com/Monash-FIT3170/Finding-Neno/',
             },
         ],
+        images: [
+            {
+                title: 'Login Page',
+                url: 'assets/fn_login.png',
+            },
+            {
+                title: 'Missing Pet Reports',
+                url: 'assets/fn_reports.png',
+            },
+            {
+                title: 'Map page',
+                url: 'assets/fn_map.png',
+            },
+        ]
     },
 ];
 
@@ -112,7 +128,7 @@ export default function Projects() {
                             ))}
                         </div>
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col mb-2">
                         Links
                         <div className="flex flex-row flex-wrap gap-2">
                             {project.links?.map((link, index) => (
@@ -128,6 +144,17 @@ export default function Projects() {
                                 </button>
                             ))}
                         </div>
+                    </div>
+                    <div className="flex flex-row justify-between">
+                        {project.images?.map((image, index) => (
+                            <Image
+                                key={`${image}-${index}`}
+                                src={image.url}
+                                alt={image.title}
+                                width={230}
+                                height={500}
+                            />
+                        ))}
                     </div>
                 </div>
             ))}
