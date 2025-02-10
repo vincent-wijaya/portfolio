@@ -2,6 +2,17 @@ import Image from "next/image";
 
 const projectList = [
     {
+        title: 'Inventory Management Web Application',
+        description:
+            'A web application to manage warehouse inventory, purchase orders, request orders, and delivery orders.' ,
+        tools: [
+            'Vue.js',
+            'Express.js',
+            'TypeScript',
+            'PostgreSQL',
+        ]
+    },
+    {
         title: 'PowerTrack - KafkaJS',
         description:
             'An energy monitoring platform for retailers and consumers which allows users to view their energy consumption and generation trends. This project\'s main focus is to demonstrate KafkaJS\'s capabilities as a data-streaming pipeline.' ,
@@ -145,9 +156,11 @@ const toolColors: { [key: string]: string } = {
     Sass: 'border-pink-400',
     SendGrid: 'border-blue-400',
     Sequelize: 'border-blue-300',
-    'Next.js': 'boreder-black-500',
+    'Next.js': 'border-black-500',
     TypeSript: 'border-blue-400',
     JavaScript: 'border-yellow-400',
+    Docker: 'border-blue-400',
+    KafkaJS: 'border-purple-400',
 }
 
 export default function Projects() {
