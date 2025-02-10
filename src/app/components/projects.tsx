@@ -2,6 +2,18 @@ import Image from "next/image";
 
 const projectList = [
     {
+        title: 'PowerTrack - KafkaJS',
+        description:
+            'An energy monitoring platform for retailers and consumers which allows users to view their energy consumption and generation trends. This project\'s main focus is to demonstrate KafkaJS\'s capabilities as a data-streaming pipeline.' ,
+        tools: [
+            'Next.js',
+            'KafkaJS',
+            'Sequelize',
+            'TypeScript',
+            'Docker',
+        ]
+    },
+    {
         title: 'Mobilise Volunteering Platform',
         description:
             'A centralised platform for volunteers to find and apply for volunteering opportunities. Our team continued the development of the platform from the previous semester, where only the some of the front-end was completed. I worked on the outreach management side of the platform, where Mobilise can manage their outreach events and volunteers can sign up for events.',
@@ -9,6 +21,7 @@ const projectList = [
             'React', 
             'Supabase', 
             'PostgreSQL', 
+            'JavaScript',
             'Sass',
             'GitHub'
         ],
@@ -33,6 +46,7 @@ const projectList = [
             'AWS S3',
             'Raspberry Pi',
             'Python',
+            'JavaScript',
             'GitHub',
         ],
         links: [
@@ -79,6 +93,8 @@ const projectList = [
             'PostgreSQL', 
             'GitHub',
             'Google Maps API', 
+            'Python',
+            'JavaScript',
             'Rest API',
             'SendGrid'
         ],
@@ -128,6 +144,10 @@ const toolColors: { [key: string]: string } = {
     'Rest API': 'border-gray-400',
     Sass: 'border-pink-400',
     SendGrid: 'border-blue-400',
+    Sequelize: 'border-blue-300',
+    'Next.js': 'boreder-black-500',
+    TypeSript: 'border-blue-400',
+    JavaScript: 'border-yellow-400',
 }
 
 export default function Projects() {
@@ -150,35 +170,38 @@ export default function Projects() {
                             {project.tools?.map((tool, index) => (
                                 <p
                                     key={`${tool}-${index}`}
-                                    className={`text-sm transition duration-300 p-2 py-1 border-4 w-max whitespace-nowrap rounded-full ${toolColors[tool]} hover:brightness-150`}
-                                >
+                                    className={`text-sm transition duration-300 p-2 py-1 border-4 w-max whitespace-nowrap rounded-full ${toolColors[tool]} hover:brightness-150`}>
                                     {tool}
                                 </p>
                             ))}
                         </div>
                     </div>
-                    <div className="flex flex-col mb-2">
-                        Links
-                        <div className="flex flex-row flex-wrap gap-2">
-                            {project.links?.map((link, index) => (
-                                <button
-                                    key={`${link}-${index}`}
-                                    className="text-lg transition duration-300 bg-blue-600 hover:brightness-75 p-1 px-2 rounded-md">
+                    {project.links && project.links.length > 0 && (
+                        <div className="flex flex-col mb-2">
+                            Links
+                            <div className="flex flex-row flex-wrap gap-2">
+                                {project.links?.map((link, index) => (
                                     <a
-                                        href={link.url}
-                                        target="_blank"
-                                        rel="noreferrer">
-                                        {link.title}
+                                    href={link.url}
+                                    target="_blank"
+                                    rel="noreferrer">
+                                        
+                                        <button
+                                            key={`${link}-${index}`}
+                                            className="text-lg transition duration-300 bg-blue-600 hover:brightness-75 p-1 px-2 rounded-md"
+                                        >
+                                            {link.title}
+                                        </button>
                                     </a>
-                                </button>
-                            ))}
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                     <div className="flex flex-row flex-wrap justify-between gap-2">
                         {project.images?.map((image, index) => (
                             <Image
                                 key={`${image}-${index}`}
-                                src={image.url}
+                                src={`/${image.url}`}
                                 alt={image.title}
                                 width={image.isPortrait ? 230 : 500}
                                 height={image.isPortrait ? 500 : 200}
