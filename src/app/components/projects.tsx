@@ -182,10 +182,10 @@ export default function Projects() {
                             <div className="flex flex-row flex-wrap gap-2">
                                 {project.links?.map((link, index) => (
                                     <a
-                                    href={link.url}
-                                    target="_blank"
-                                    rel="noreferrer">
-                                        
+                                        href={link.url}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
                                         <button
                                             key={`${link}-${index}`}
                                             className="text-lg transition duration-300 bg-blue-600 hover:brightness-75 p-1 px-2 rounded-md"
@@ -201,7 +201,7 @@ export default function Projects() {
                         {project.images?.map((image, index) => (
                             <Image
                                 key={`${image}-${index}`}
-                                src={`/${image.url}`}
+                                src={image.url}
                                 alt={image.title}
                                 width={image.isPortrait ? 230 : 500}
                                 height={image.isPortrait ? 500 : 200}
