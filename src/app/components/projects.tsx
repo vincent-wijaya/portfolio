@@ -182,12 +182,12 @@ export default function Projects() {
                             <div className="flex flex-row flex-wrap gap-2">
                                 {project.links?.map((link, index) => (
                                     <a
+                                        key={`${link}-${index}`}
                                         href={link.url}
                                         target="_blank"
                                         rel="noreferrer"
                                     >
                                         <button
-                                            key={`${link}-${index}`}
                                             className="text-lg transition duration-300 bg-blue-600 hover:brightness-75 p-1 px-2 rounded-md"
                                         >
                                             {link.title}
