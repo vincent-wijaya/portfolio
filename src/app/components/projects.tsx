@@ -218,7 +218,7 @@ export default function Projects() {
                         {project.images?.map((image, index) => (
                             <Image
                                 key={`${image}-${index}`}
-                                src={`/${image.url}`}
+                                src={image.url}
                                 alt={image.title}
                                 width={image.isPortrait ? 230 : 500}
                                 height={image.isPortrait ? 500 : 200}
