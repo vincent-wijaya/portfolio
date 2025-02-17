@@ -9,7 +9,9 @@ const projectList = [
             'Vue.js',
             'Express.js',
             'TypeScript',
+            'JavaScript',
             'PostgreSQL',
+            'GitHub'
         ]
     },
     {
@@ -22,6 +24,7 @@ const projectList = [
             'Sequelize',
             'TypeScript',
             'Docker',
+            'GitLab'
         ]
     },
     {
@@ -150,16 +153,17 @@ const toolColors: { [key: string]: string } = {
     'AWS S3': 'border-red-300',
     'Raspberry Pi': 'border-red-400',
     Python: 'border-yellow-400',
+    GitLab: 'border-orange-600',
     GitHub: 'border-gray-400',
     'Google Maps API': 'border-green-400',
     'Rest API': 'border-gray-400',
     Sass: 'border-pink-400',
     SendGrid: 'border-blue-400',
     Sequelize: 'border-blue-300',
-    'Next.js': 'border-black-500',
-    TypeSript: 'border-blue-400',
+    'Next.js': 'border-gray-800',
+    TypeScript: 'border-blue-400',
     JavaScript: 'border-yellow-400',
-    Docker: 'border-blue-400',
+    Docker: 'border-blue-600',
     KafkaJS: 'border-purple-400',
 }
 
@@ -214,7 +218,7 @@ export default function Projects() {
                         {project.images?.map((image, index) => (
                             <Image
                                 key={`${image}-${index}`}
-                                src={image.url}
+                                src={`/${image.url}`}
                                 alt={image.title}
                                 width={image.isPortrait ? 230 : 500}
                                 height={image.isPortrait ? 500 : 200}
