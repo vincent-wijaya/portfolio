@@ -1,4 +1,7 @@
+ 'use client';
+
 import Image from "next/image";
+import { useState } from "react";
 
 const projectList = [
     {
@@ -168,6 +171,19 @@ const toolColors: { [key: string]: string } = {
 }
 
 export default function Projects() {
+    const [hiddenImages, setHiddenImages] = useState<Record<number, boolean>>(() =>
+        Object.fromEntries(
+            projectList.map((project, index) => [index, Boolean(project.images?.length)])
+        )
+    );
+
+    const toggleImages = (index: number) => {
+        setHiddenImages((prev) => ({
+            ...prev,
+            [index]: !prev[index],
+        }));
+    };
+
     return (
         <section
             id="projects"
@@ -179,51 +195,79 @@ export default function Projects() {
                 <div
                     id={project.title}
                     key={`${project}-${index}`}
-                    className="mt-4 transition duration-300 hover:translate-x-2">
+                    className="mt-4 transition duration-300 hover:translate-x-2 border border-white/10 rounded-2xl p-4">
                     <h3 className="text-2xl font-bold">{project.title}</h3>
-                    <p className="text-lg mb-2">{project.description}</p>
-                    <div className="flex flex-col mb-2">
-                        <div className="flex flex-wrap flex-row gap-2">
-                            {project.tools?.map((tool, index) => (
-                                <p
-                                    key={`${tool}-${index}`}
-                                    className={`text-sm transition duration-300 p-2 py-1 border-4 w-max whitespace-nowrap rounded-full ${toolColors[tool]} hover:brightness-150`}>
-                                    {tool}
-                                </p>
-                            ))}
-                        </div>
-                    </div>
-                    {project.links && project.links.length > 0 && (
-                        <div className="flex flex-col mb-2">
-                            Links
-                            <div className="flex flex-row flex-wrap gap-2">
-                                {project.links?.map((link, index) => (
-                                    <a
-                                        key={`${link}-${index}`}
-                                        href={link.url}
-                                        target="_blank"
-                                        rel="noreferrer"
+                    <p className="text-lg mb-2 mt-2">{project.description}</p>
+                    <div className="overflow-hidden">
+                        <div className="flex flex-col mb-2 pt-2">
+                            <div className="flex flex-wrap flex-row gap-2">
+                                {project.tools?.map((tool, index) => (
+                                    <p
+                                        key={`${tool}-${index}`}
+                                        className={`text-sm transition duration-300 p-2 py-1 border-4 w-max whitespace-nowrap rounded-full ${toolColors[tool]} hover:brightness-150`}
                                     >
-                                        <button
-                                            className="text-lg transition duration-300 bg-blue-600 hover:brightness-75 p-1 px-2 rounded-md"
-                                        >
-                                            {link.title}
-                                        </button>
-                                    </a>
+                                        {tool}
+                                    </p>
                                 ))}
                             </div>
                         </div>
-                    )}
-                    <div className="flex flex-row flex-wrap justify-between gap-2">
-                        {project.images?.map((image, index) => (
-                            <Image
-                                key={`${image}-${index}`}
-                                src={image.url}
-                                alt={image.title}
-                                width={image.isPortrait ? 230 : 500}
-                                height={image.isPortrait ? 500 : 200}
-                            />
-                        ))}
+
+                        {project.links && project.links.length > 0 && (
+                            <div className="flex flex-col mb-2">
+                                Links
+                                <div className="flex flex-row flex-wrap gap-2">
+                                    {project.links?.map((link, index) => (
+                                        <a
+                                            key={`${link}-${index}`}
+                                            href={link.url}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            <button
+                                                className="text-lg transition duration-300 bg-blue-600 hover:brightness-75 p-1 px-2 rounded-md"
+                                            >
+                                                {link.title}
+                                            </button>
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        <div className="flex flex-row flex-wrap justify-between gap-2">
+                            {project.images && project.images.length > 0 && (
+                                <div className="w-full flex justify-start mt-2 mb-1">
+                                    <button
+                                        type="button"
+                                        onClick={() => toggleImages(index)}
+                                        className="text-sm border px-3 py-1 rounded-full transition duration-200 hover:brightness-125"
+                                        aria-expanded={!hiddenImages[index]}
+                                        aria-controls={`project-images-${index}`}
+                                    >
+                                        {hiddenImages[index] ? 'Show images' : 'Hide images'}
+                                    </button>
+                                </div>
+                            )}
+                            <div
+                                id={`project-images-${index}`}
+                                className={`w-full overflow-hidden transition-[max-height,opacity] duration-300 ${
+                                    hiddenImages[index] ? 'max-h-0 opacity-0' : 'max-h-[2400px] opacity-100'
+                                }`}
+                            >
+                                <div className="flex flex-row flex-wrap justify-between gap-2">
+                                    {project.images?.map((image, index) => (
+                                        <Image
+                                            key={`${image}-${index}`}
+                                            src={image.url}
+                                            alt={image.title}
+                                            width={image.isPortrait ? 230 : 500}
+                                            height={image.isPortrait ? 500 : 200}
+                                            className="rounded-lg transition duration-300 hover:scale-[1.02]"
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             ))}

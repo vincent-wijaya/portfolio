@@ -27,7 +27,8 @@ export default function Experience() {
                     <picture>    
                         <source srcSet={experience.logo_dark} media="(prefers-color-scheme: dark)" />
                         <Image
-                            src={experience.logo}
+                            // src={experience.logo}
+                            src={`/${experience.logo}`}
                             alt={experience.company}
                             width={100}
                             height={100}

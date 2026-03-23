@@ -10,7 +10,7 @@ import Contact from './components/contact';
 export default function Home() {
     return (
         // <main className="flex min-h-screen flex-col items-center justify-between p-24"
-        <main className="flex flex-col mx-5 my-5 items-center">
+        <main className="flex flex-col mx-5 my-5 items-center pt-20">
             <Header />
 
             <div className="flex flex-col items-center max-w-screen-md mt-4">

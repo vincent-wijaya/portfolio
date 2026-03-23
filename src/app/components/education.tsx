@@ -52,7 +52,9 @@ export default function Education() {
                             media="(prefers-color-scheme: dark)"
                         />
                         <Image
-                            src={education.logo}
+                            // src={education.logo}
+                            
+                            src={`/${education.logo}`}
                             alt={education.school}
                             width={200}
                             height={50}
