@@ -1,276 +1,371 @@
- 'use client';
+'use client';
 
-import Image from "next/image";
-import { useState } from "react";
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
-const projectList = [
-    {
-        title: 'Inventory Management Web Application',
-        description:
-            'A web application to manage warehouse inventory, purchase orders, request orders, and delivery orders.' ,
-        tools: [
-            'Vue.js',
-            'Express.js',
-            'TypeScript',
-            'JavaScript',
-            'PostgreSQL',
-            'GitHub'
-        ]
-    },
-    {
-        title: 'PowerTrack - KafkaJS',
-        description:
-            'An energy monitoring platform for retailers and consumers which allows users to view their energy consumption and generation trends. This project\'s main focus is to demonstrate KafkaJS\'s capabilities as a data-streaming pipeline.' ,
-        tools: [
-            'Next.js',
-            'KafkaJS',
-            'Sequelize',
-            'TypeScript',
-            'Docker',
-            'GitLab'
-        ]
-    },
-    {
-        title: 'Mobilise Volunteering Platform',
-        description:
-            'A centralised platform for volunteers to find and apply for volunteering opportunities. Our team continued the development of the platform from the previous semester, where only the some of the front-end was completed. I worked on the outreach management side of the platform, where Mobilise can manage their outreach events and volunteers can sign up for events.',
-        tools: [
-            'React', 
-            'Supabase', 
-            'PostgreSQL', 
-            'JavaScript',
-            'Sass',
-            'GitHub'
-        ],
-        links: [
-            {
-                title: 'Mobilise',
-                url: 'https://wearemobilise.org.au/',
-            },
-        ],
-    },
-    {
-        title: 'Internet-Based Brewing Controller',
-        description:
-            "A Final Year Project to create a web-based controller for a Monash Brewlab's fermentation system. The system consists of a AWS hosted web server and a Raspberry Pi to control the fermentation system. \n\nFeatures include temperature control, data logging, and remote monitoring. \n\nI mainly worked on the web interface, adding the live chart display, schedule event system, manual override system, and the authentication component of the web interface.",
-        tools: [
-            'Vue.js',
-            'AWS',
-            'AWS Gateway',
-            'AWS Lambda',
-            'AWS DynamoDB',
-            'AWS Cognito',
-            'AWS S3',
-            'Raspberry Pi',
-            'Python',
-            'JavaScript',
-            'GitHub',
-        ],
-        links: [
-            {
-                title: 'Monash Brewlab',
-                url: 'https://www.monashbrewlab.com/',
-            },
-            {
-                title: 'Google Drive',
-                url: 'https://drive.google.com/drive/u/0/folders/1zksBAL9Lfi7xnPTBEBDQ2Vr_fsmgG2bX'
-            }
-        ],
-        images: [
-            {
-                title: 'Home Page',
-                url: 'assets/mb_home.png',
-                isPortrait: false,
-            },
-            {
-                title: 'Schedule Event Page',
-                url: 'assets/mb_schedule.png',
-                isPortrait: true,
-            },
-            {
-                title: 'Faults',
-                url: 'assets/mb_fault.png',
-                isPortrait: false,
-            },
-            {
-                title: 'Team Photo with product',
-                url: 'assets/mb_team.jpg',
-                isPortrait: false,
-            }
-        ]
-    },
-    {
-        title: 'Finding Neno - Lost Pet Finder Mobile App',
-        description:
-            'A mobile app that allows users to report lost pets and view lost pets in their area. Users can post lost pets, view lost pets in their area, post sightings of pets, and contact the owner of the lost pet. Missing pets that are reported nearby are notified to the user.',
-        tools: [
-            'React Native', 
-            'Expo',
-            'Flask',
-            'PostgreSQL', 
-            'GitHub',
-            'Google Maps API', 
-            'Python',
-            'JavaScript',
-            'Rest API',
-            'SendGrid'
-        ],
-        links: [
-            {
-                title: 'GitHub',
-                url: 'https://github.com/Monash-FIT3170/Finding-Neno/',
-            },
-        ],
-        images: [
-            {
-                title: 'Login Page',
-                url: 'assets/fn_login.png',
-                isPortrait: true,
-            },
-            {
-                title: 'Missing Pet Reports',
-                url: 'assets/fn_reports.png',
-                isPortrait: true,
-            },
-            {
-                title: 'Map page',
-                url: 'assets/fn_map.png',
-                isPortrait: true,
-            },
-        ]
-    },
+type ProjectLink = { title: string; url: string };
+type ProjectImage = { title: string; url: string; isPortrait: boolean };
+
+type Project = {
+  title: string;
+  blurb: string;
+  description: string;
+  tools: string[];
+  links?: ProjectLink[];
+  images?: ProjectImage[];
+};
+
+const projectList: Project[] = [
+  {
+    title: 'CropNexus',
+    blurb: 'Farm charts, weather, sensor monitoring',
+    description:
+      'Full-stack agronomic monitoring for Carbon Edge. Real-time farm charts and weather, shared nexus-charts library, auth, and analysis UI used across client sites.',
+    tools: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Drizzle ORM',
+      'PostgreSQL',
+      'Highcharts',
+      'TanStack Query',
+      'Clerk',
+      'Tailwind CSS',
+      'pnpm',
+    ],
+  },
+  {
+    title: 'WESPI Inventory Platform',
+    blurb: 'Warehouse ops, live stock, VPS deploys',
+    description:
+      'Production inventory system for warehouse stock, purchase orders, request orders, and delivery orders. Multi-tenant orgs, live low-stock updates over WebSockets, PDF generation, CI/CD, and DigitalOcean VPS deploys for staging and prod.',
+    tools: [
+      'Vue.js',
+      'Express.js',
+      'TypeScript',
+      'JavaScript',
+      'PostgreSQL',
+      'WebSocket',
+      'Docker',
+      'DigitalOcean',
+      'VPS',
+      'Nginx',
+      'GitHub Actions',
+      'Puppeteer',
+      'Gotenberg',
+      'pnpm',
+      'Tailwind CSS',
+      'Telegram',
+      'GitHub',
+    ],
+  },
+  {
+    title: 'Olimo — Well Monitoring',
+    blurb: 'Node-RED → modern IoT stack',
+    description:
+      'Large Node-RED well / pump monitoring system migrated toward a modern stack for WESPI. Industrial metrics, Modbus-style field data, and ops views so wells stay visible without living forever in spaghetti flows.',
+    tools: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Rust',
+      'Node-RED',
+      'Docker',
+      'TanStack Query',
+      'Tailwind CSS',
+      'pnpm',
+    ],
+  },
+  {
+    title: 'PowerTrack - KafkaJS',
+    blurb: 'Energy trends on a Kafka stream',
+    description:
+      'Energy monitoring platform for retailers and consumers to view consumption and generation trends. Built around a KafkaJS data-streaming pipeline with containerised services.',
+    tools: [
+      'Next.js',
+      'React',
+      'KafkaJS',
+      'Apache Kafka',
+      'Node.js',
+      'Sequelize',
+      'PostgreSQL',
+      'TypeScript',
+      'Docker',
+      'Docker Compose',
+      'GitLab',
+      'GitLab CI',
+    ],
+  },
+  {
+    title: 'Mobilise Volunteering Platform',
+    blurb: 'Outreach events + volunteer signup',
+    description:
+      'Centralised platform for volunteers to find and apply for opportunities. Continued prior-semester front-end work; I owned outreach management so Mobilise can run events and volunteers can sign up.',
+    tools: [
+      'React',
+      'Supabase',
+      'PostgreSQL',
+      'JavaScript',
+      'Sass',
+      'REST API',
+      'Auth',
+      'GitHub',
+    ],
+    links: [{ title: 'Mobilise', url: 'https://wearemobilise.org.au/' }],
+  },
+  {
+    title: 'Internet-Based Brewing Controller',
+    blurb: 'Brewlab tanks, charts, Cognito auth',
+    description:
+      'Final Year Project: web controller for Monash Brewlab fermentation. AWS-hosted API plus Raspberry Pi on the tank. Temperature control, data logging, remote monitoring. I built the web UI — live charts, schedule events, manual override, and Cognito auth.',
+    tools: [
+      'Vue.js',
+      'JavaScript',
+      'Python',
+      'AWS',
+      'API Gateway',
+      'AWS Lambda',
+      'DynamoDB',
+      'Cognito',
+      'S3',
+      'Raspberry Pi',
+      'IoT',
+      'Charts',
+      'GitHub',
+    ],
+    links: [
+      { title: 'Monash Brewlab', url: 'https://www.monashbrewlab.com/' },
+      {
+        title: 'Google Drive',
+        url: 'https://drive.google.com/drive/u/0/folders/1zksBAL9Lfi7xnPTBEBDQ2Vr_fsmgG2bX',
+      },
+    ],
+    images: [
+      { title: 'Home Page', url: 'assets/mb_home.png', isPortrait: false },
+      {
+        title: 'Schedule Event Page',
+        url: 'assets/mb_schedule.png',
+        isPortrait: true,
+      },
+      { title: 'Faults', url: 'assets/mb_fault.png', isPortrait: false },
+      {
+        title: 'Team Photo with product',
+        url: 'assets/mb_team.jpg',
+        isPortrait: false,
+      },
+    ],
+  },
+  {
+    title: 'Finding Neno - Lost Pet Finder',
+    blurb: 'Maps, sightings, nearby alerts',
+    description:
+      'Mobile app to report and browse lost pets nearby. Post pets and sightings, map view, contact owners, and notify users when a missing pet is reported close by.',
+    tools: [
+      'React Native',
+      'Expo',
+      'Flask',
+      'Python',
+      'PostgreSQL',
+      'Google Maps API',
+      'SendGrid',
+      'REST API',
+      'Push Notifications',
+      'JavaScript',
+      'GitHub',
+    ],
+    links: [
+      {
+        title: 'GitHub',
+        url: 'https://github.com/Monash-FIT3170/Finding-Neno/',
+      },
+    ],
+    images: [
+      { title: 'Login Page', url: 'assets/fn_login.png', isPortrait: true },
+      {
+        title: 'Missing Pet Reports',
+        url: 'assets/fn_reports.png',
+        isPortrait: true,
+      },
+      { title: 'Map page', url: 'assets/fn_map.png', isPortrait: true },
+    ],
+  },
 ];
 
-const toolColors: { [key: string]: string } = {
-    React: 'border-blue-400',
-    'React Native': 'border-blue-200',
-    'Vue.js': 'border-green-400',
-    Flask: 'border-gray-400',
-    PostgreSQL: 'border-cyan-600',
-    'Supabase': 'border-green-500',
-    'AWS': 'border-orange-400',
-    'AWS Gateway': 'border-yellow-400',
-    'AWS Lambda': 'border-orange-400',
-    'AWS DynamoDB': 'border-blue-600',
-    'AWS Cognito': 'border-red-500',
-    'AWS S3': 'border-red-300',
-    'Raspberry Pi': 'border-red-400',
-    Python: 'border-yellow-400',
-    GitLab: 'border-orange-600',
-    GitHub: 'border-gray-400',
-    'Google Maps API': 'border-green-400',
-    'Rest API': 'border-gray-400',
-    Sass: 'border-pink-400',
-    SendGrid: 'border-blue-400',
-    Sequelize: 'border-blue-300',
-    'Next.js': 'border-gray-800',
-    TypeScript: 'border-blue-400',
-    JavaScript: 'border-yellow-400',
-    Docker: 'border-blue-600',
-    KafkaJS: 'border-purple-400',
+function ToolRow({ tools }: { tools: string[] }) {
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {tools.map((tool) => (
+        <span
+          key={tool}
+          className="rounded-md border border-[var(--line)] bg-white/40 px-2 py-0.5 text-xs text-[var(--muted)]"
+        >
+          {tool}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function LinkRow({ links }: { links?: ProjectLink[] }) {
+  if (!links?.length) return null;
+  return (
+    <div className="mt-3 flex flex-wrap gap-2">
+      {links.map((link) => (
+        <a
+          key={link.url}
+          href={link.url}
+          target="_blank"
+          rel="noreferrer"
+          className="text-sm text-[var(--accent)] underline underline-offset-4 transition hover:brightness-90"
+        >
+          {link.title}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function ImageGallery({
+  images,
+  open,
+  onToggle,
+  panelId,
+}: {
+  images?: ProjectImage[];
+  open: boolean;
+  onToggle: () => void;
+  panelId: string;
+}) {
+  if (!images?.length) return null;
+
+  return (
+    <div className="mt-3">
+      <button
+        type="button"
+        onClick={onToggle}
+        className="text-sm text-[var(--muted)] underline underline-offset-4"
+        aria-expanded={open}
+        aria-controls={panelId}
+      >
+        {open ? 'Hide images' : 'Show images'}
+      </button>
+      <div
+        id={panelId}
+        className={`overflow-hidden transition-[max-height,opacity] duration-500 ${
+          open ? 'mt-3 max-h-[2400px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="flex flex-row flex-wrap gap-2">
+          {images.map((image) => (
+            <Image
+              key={image.url}
+              src={image.url}
+              alt={image.title}
+              width={image.isPortrait ? 180 : 360}
+              height={image.isPortrait ? 360 : 180}
+              className="rounded-lg object-cover"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function Projects() {
-    const [hiddenImages, setHiddenImages] = useState<Record<number, boolean>>(() =>
-        Object.fromEntries(
-            projectList.map((project, index) => [index, Boolean(project.images?.length)])
-        )
-    );
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [imageOpen, setImageOpen] = useState<Record<number, boolean>>({});
+  const navLockedRef = useRef(false);
 
-    const toggleImages = (index: number) => {
-        setHiddenImages((prev) => ({
-            ...prev,
-            [index]: !prev[index],
-        }));
+  // Nav jumps freeze accordion so height thrash does not steal the scroll target
+  useEffect(() => {
+    const onLock = () => {
+      navLockedRef.current = true;
+      setOpenIndex(null);
+      window.setTimeout(() => {
+        navLockedRef.current = false;
+      }, 900);
     };
 
-    return (
-        <section
-            id="projects"
-            className="flex flex-col flex-1 p-6 transition duration-300 
-            hover:bg-opacity-10 hover:bg-white  rounded-3xl w-full">
-            <h2 className="text-3xl font-bold">Projects</h2>
+    window.addEventListener('portfolio:nav-lock', onLock);
+    return () => window.removeEventListener('portfolio:nav-lock', onLock);
+  }, []);
 
-            {projectList.map((project, index) => (
-                <div
-                    id={project.title}
-                    key={`${project}-${index}`}
-                    className="mt-4 transition duration-300 hover:translate-x-2 border border-white/10 rounded-2xl p-4">
-                    <h3 className="text-2xl font-bold">{project.title}</h3>
-                    <p className="text-lg mb-2 mt-2">{project.description}</p>
-                    <div className="overflow-hidden">
-                        <div className="flex flex-col mb-2 pt-2">
-                            <div className="flex flex-wrap flex-row gap-2">
-                                {project.tools?.map((tool, index) => (
-                                    <p
-                                        key={`${tool}-${index}`}
-                                        className={`text-sm transition duration-300 p-2 py-1 border-4 w-max whitespace-nowrap rounded-full ${toolColors[tool]} hover:brightness-150`}
-                                    >
-                                        {tool}
-                                    </p>
-                                ))}
-                            </div>
-                        </div>
+  return (
+    <section id="projects" className="flex w-full flex-col px-6 py-6">
+      <h2 className="font-display text-3xl font-semibold text-[var(--sand)]">
+        Projects
+      </h2>
 
-                        {project.links && project.links.length > 0 && (
-                            <div className="flex flex-col mb-2">
-                                Links
-                                <div className="flex flex-row flex-wrap gap-2">
-                                    {project.links?.map((link, index) => (
-                                        <a
-                                            key={`${link}-${index}`}
-                                            href={link.url}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
-                                            <button
-                                                className="text-lg transition duration-300 bg-blue-600 hover:brightness-75 p-1 px-2 rounded-md"
-                                            >
-                                                {link.title}
-                                            </button>
-                                        </a>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        <div className="flex flex-row flex-wrap justify-between gap-2">
-                            {project.images && project.images.length > 0 && (
-                                <div className="w-full flex justify-start mt-2 mb-1">
-                                    <button
-                                        type="button"
-                                        onClick={() => toggleImages(index)}
-                                        className="text-sm border px-3 py-1 rounded-full transition duration-200 hover:brightness-125"
-                                        aria-expanded={!hiddenImages[index]}
-                                        aria-controls={`project-images-${index}`}
-                                    >
-                                        {hiddenImages[index] ? 'Show images' : 'Hide images'}
-                                    </button>
-                                </div>
-                            )}
-                            <div
-                                id={`project-images-${index}`}
-                                className={`w-full overflow-hidden transition-[max-height,opacity] duration-300 ${
-                                    hiddenImages[index] ? 'max-h-0 opacity-0' : 'max-h-[2400px] opacity-100'
-                                }`}
-                            >
-                                <div className="flex flex-row flex-wrap justify-between gap-2">
-                                    {project.images?.map((image, index) => (
-                                        <Image
-                                            key={`${image}-${index}`}
-                                            src={image.url}
-                                            alt={image.title}
-                                            width={image.isPortrait ? 230 : 500}
-                                            height={image.isPortrait ? 500 : 200}
-                                            className="rounded-lg transition duration-300 hover:scale-[1.02]"
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <div className="mt-6 border-t border-[var(--line)]">
+        {projectList.map((project, index) => {
+          const open = openIndex === index;
+          return (
+            <article
+              key={project.title}
+              data-project-index={index}
+              className="scroll-mt-28 border-b border-[var(--line)] py-5"
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  if (navLockedRef.current) return;
+                  setOpenIndex((prev) => (prev === index ? null : index));
+                }}
+                className="flex w-full items-start justify-between gap-4 text-left"
+                aria-expanded={open}
+              >
+                <div className="min-w-0">
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-display text-sm text-[var(--accent)]">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="font-display text-xl font-semibold text-[var(--sand)] sm:text-2xl">
+                      {project.title}
+                    </h3>
+                  </div>
+                  <p className="mt-1 pl-8 text-sm text-[var(--muted)]">
+                    {project.blurb}
+                  </p>
                 </div>
-            ))}
-        </section>
-    );
+                <span
+                  className={`mt-0.5 shrink-0 text-2xl leading-none text-[var(--muted)] transition duration-400 ${
+                    open ? 'rotate-45' : ''
+                  }`}
+                >
+                  +
+                </span>
+              </button>
+              <div
+                className={`overflow-hidden transition-[max-height,opacity] duration-400 ease-out ${
+                  open ? 'max-h-[1800px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="pb-2 pl-8 pr-2 pt-3 sm:pr-8">
+                  <p className="leading-relaxed text-[var(--sand)]/85">
+                    {project.description}
+                  </p>
+                  <div className="mt-3">
+                    <ToolRow tools={project.tools} />
+                  </div>
+                  <LinkRow links={project.links} />
+                  <ImageGallery
+                    images={project.images}
+                    open={Boolean(imageOpen[index])}
+                    onToggle={() =>
+                      setImageOpen((prev) => ({
+                        ...prev,
+                        [index]: !prev[index],
+                      }))
+                    }
+                    panelId={`fold-images-${index}`}
+                  />
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
 }

@@ -3,27 +3,37 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  --ink: #2a211c;
+  --ink-soft: #fff7f2;
+  --sand: #2a211c;
+  --muted: #8a7568;
+  --accent: #d4846a;
+  --accent-warm: #e8b49a;
+  --line: rgba(42, 33, 28, 0.12);
+  --surface: rgba(255, 255, 255, 0.78);
+  --orbit-radius: min(36vw, 11.5rem);
+  --foreground-rgb: 42, 33, 28;
+  --background-start-rgb: 255, 250, 247;
+  --background-end-rgb: 255, 236, 226;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (min-width: 640px) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --orbit-radius: 13.5rem;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(255, 214, 196, 0.55), transparent 45%),
+    radial-gradient(ellipse at 85% 15%, rgba(255, 232, 220, 0.7), transparent 40%),
+    linear-gradient(
       to bottom,
-      transparent,
+      rgb(var(--background-start-rgb)),
       rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    );
+  min-height: 100vh;
   scroll-behavior: smooth;
 }
 
@@ -31,4 +41,89 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.tool-glass {
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(180, 180, 185, 0.22) 45%,
+      rgba(120, 120, 128, 0.18) 100%
+    );
+  box-shadow:
+    0 8px 24px rgba(42, 33, 28, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(80, 80, 90, 0.12);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.tool-glass:hover,
+.tool-glass:focus-visible,
+.tool-glass--active {
+  border-color: rgba(255, 255, 255, 0.75);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(190, 190, 198, 0.32) 50%,
+      rgba(130, 130, 140, 0.22) 100%
+    );
+  box-shadow:
+    0 10px 28px rgba(42, 33, 28, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 rgba(80, 80, 90, 0.1);
+}
+
+.tool-glass__icon {
+  filter: grayscale(1) contrast(0.92) brightness(0.78);
+  opacity: 0.88;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.tool-glass:hover .tool-glass__icon,
+.tool-glass:focus-visible .tool-glass__icon,
+.tool-glass--active .tool-glass__icon {
+  filter: grayscale(1) contrast(1) brightness(0.55);
+  opacity: 1;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html {
+  scroll-snap-type: y proximity;
+}
+
+.experience-snap {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Open-ended rail tip — Present roles keep going past last stop */
+.experience-rail-open {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 3px,
+    rgba(212, 132, 106, 0.55) 3px,
+    rgba(212, 132, 106, 0.55) 5px
+  );
+  mask-image: linear-gradient(to right, transparent, black 40%);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 40%);
+  opacity: 0.85;
 }

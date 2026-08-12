@@ -1,25 +1,21 @@
-import ScrollToTop from 'react-scroll-up';
-
-import About from "./components/about";
-import Education from "./components/education";
-import Experience from "./components/experience";
-import Header from "./components/header";
-import Projects from "./components/projects";
+import Hero from './components/hero';
+import Education from './components/education';
+import Experience from './components/experience';
+import Header from './components/header';
+import Projects from './components/projects';
 import Contact from './components/contact';
 
 export default function Home() {
-    return (
-        // <main className="flex min-h-screen flex-col items-center justify-between p-24"
-        <main className="flex flex-col mx-5 my-5 items-center pt-20">
-            <Header />
-
-            <div className="flex flex-col items-center max-w-screen-md mt-4">
-                <About />
-                <Experience />
-                <Education />
-                <Projects />
-                <Contact />
-            </div>
-        </main>
-    );
+  return (
+    <main className="flex flex-col items-center">
+      <Header />
+      <div className="mt-14 w-full max-w-screen-md overflow-x-visible px-5 pb-16 sm:mt-0 sm:pl-16">
+        <Hero />
+        <Experience />
+        <Projects />
+        <Education />
+        <Contact />
+      </div>
+    </main>
+  );
 }
