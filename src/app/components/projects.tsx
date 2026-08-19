@@ -5,15 +5,30 @@ import { useState } from "react";
 
 const projectList = [
     {
-        title: 'Inventory Management Web Application',
+        title: 'WESPI Inventory Platform',
         description:
-            'A web application to manage warehouse inventory, purchase orders, request orders, and delivery orders.' ,
+            'Production inventory system for PT WESP Indonesia warehouse stock, purchase orders, request orders, and delivery orders. Multi-tenant orgs, live low-stock updates over WebSockets, PDF generation, CI/CD, and DigitalOcean VPS deploys for staging and prod.',
         tools: [
             'Vue.js',
             'Express.js',
             'TypeScript',
             'JavaScript',
             'PostgreSQL',
+            'WebSocket',
+            'Docker',
+            'GitHub'
+        ]
+    },
+    {
+        title: 'CropNexus',
+        description:
+            'Full-stack agronomic monitoring for Carbon Edge. Real-time farm charts and weather, shared nexus-charts library, auth, and analysis UI used across client sites.',
+        tools: [
+            'Next.js',
+            'React',
+            'TypeScript',
+            'PostgreSQL',
+            'Tailwind CSS',
             'GitHub'
         ]
     },
@@ -168,6 +183,9 @@ const toolColors: { [key: string]: string } = {
     JavaScript: 'border-yellow-400',
     Docker: 'border-blue-600',
     KafkaJS: 'border-purple-400',
+    WebSocket: 'border-emerald-400',
+    'Tailwind CSS': 'border-cyan-400',
+    'Express.js': 'border-gray-500',
 }
 
 export default function Projects() {
