@@ -23,7 +23,7 @@ const experienceList: ExperienceItem[] = [
         bullets: [
             'Build and ship full-stack features for CropNexus, a real-time farm monitoring platform used across Australian farms (weather, plant and soil sensors, charts, and analysis UI).',
             'Own shared charting through a reusable nexus-charts library so farm dashboards stay consistent across client sites.',
-            'Deliver client web platforms, including People Like You, a video coaching product, and headless Shopify storefronts.',
+            'Deliver client web platforms, including a health-tech MVP for chronic pain support, a video coaching product, and headless Shopify storefronts.',
             'Work across Next.js, React, TypeScript, PostgreSQL, and Drizzle — from requirements through implementation and deploy.',
             'Partner with a small consulting team to turn messy business needs into clean, usable software.',
         ],
